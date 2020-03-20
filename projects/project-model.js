@@ -3,9 +3,7 @@ const db = require('../db-config')
 module.exports={
     find,
     findById,
-    addProject,
-    findResources,
-    addResource,
+    addProject,    
     findTasks,
     addTask
 }
@@ -29,24 +27,15 @@ async function addProject(project){
     return findById(project_id)
 }
 
-//------------
-function findResources(){
-    return db("resources")
-    
-}
-
-//----------
-function addResource(){
-
-}
-
 //----------
 
 function findTasks(){
-
+    return db("tasks")
+   
 }
 
 //----------
-function addTask(){
-
-}
+async function addTask(task){
+    const [task_id] = await db("tasks").insert(task)
+    return findById(task_id)
+  }

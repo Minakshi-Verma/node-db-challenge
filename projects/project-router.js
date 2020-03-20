@@ -47,27 +47,49 @@ router.post('/', (req,res)=>{
       });
 })
 
+//----GET TASKs------
 
-//----GET all resources-----
+router.get('/:project_id/tasks', (req,res)=>{
+  const {project_id}= req.params
+  Projects.findById(project_id)
+  .then(project=>{
+    if(project){
+      Projects.findTasks()
+      .then(task=>{
+        if(task){
+          res.status(200).json(tasks)
+        }else{
+          res.status(500).json({error:"sorry! icorrect information provided"})
+        }
 
-router.get('/', (req, res) => {
-    Projects.findResources()
-    .then(resources => {
-      res.json(resources);
-    })
-    .catch(err => {
-      res.status(500).json({ message: 'Failed to get resources' });
-    });
-  });
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+    }
+  })
+})
 
 
-
-//---ADD resources---------
-
-
-//----GET all tasks (with project name and project description-----
 
 //---ADD tasks---------
+router.post('/:project_id/tasks', (req,res)=>{
+  const taskData = req.body
+  const {project_id}= req.params
+  Projects.findById(project_id)
+  .then(project=>{
+    if(project){
+       Projects.addTask(taskData)
+    .then(task=>{
+      res.status(201).json(task);
+    })
+    }
+  }) 
+    .catch (err => {
+      res.status(500).json({ message: 'Failed to create new task' });
+    });
+  
+})
 
 
 
