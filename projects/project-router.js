@@ -17,13 +17,13 @@ router.get('/', (req, res) => {
 
 
 //GET project by id----
-router.get('/:project_id', (req, res) => {
+router.get('/:project_id/project', (req, res) => {
     const { project_id } = req.params;
   
     Projects.findById(project_id)
     .then(project => {
       if (project) {
-        res.json(project);
+        res.status(200).json(project);
       } else {
         res.status(404).json({ message: 'Could not find project with given id.' })
       }
@@ -47,8 +47,18 @@ router.post('/', (req,res)=>{
       });
 })
 
-//----GET TASKs------
+// //----GET TASKs------
+// router.get('/tasks',(req,res)=>{
+//   Projects.findTasks()
+//   .then(tasks=>{
+//     res.status(200).json(tasks)
+//   })
+//   .catch(err=>{
+//     res.status(500).json({ message: err });
+//       });
+// })
 
+//-----------
 router.get('/:project_id/tasks', (req,res)=>{
   const {project_id}= req.params
   Projects.findById(project_id)
@@ -59,9 +69,8 @@ router.get('/:project_id/tasks', (req,res)=>{
         if(task){
           res.status(200).json(tasks)
         }else{
-          res.status(500).json({error:"sorry! icorrect information provided"})
+          res.status(500).json({error:"sorry! incorrect information provided"})
         }
-
       })
       .catch(err=>{
         console.log(err)
@@ -69,8 +78,6 @@ router.get('/:project_id/tasks', (req,res)=>{
     }
   })
 })
-
-
 
 //---ADD tasks---------
 router.post('/:project_id/tasks', (req,res)=>{
