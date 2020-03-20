@@ -9,7 +9,10 @@ module.exports={
 //----------find all tasks--
 function findTasks(){
     return db("tasks")
-}
+    .select('p.name','p.description','t.task_id','t.notes','t.completed')
+    .from('tasks as t')
+    .join('projects as p', 't.project_id', '=', 'p.project_id')
+    }
 
 //-----find task by id---
 function findtaskById(task_id){
