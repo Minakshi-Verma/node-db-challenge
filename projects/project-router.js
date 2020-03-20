@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 router.get('/:project_id', (req, res) => {
     const { project_id } = req.params;
   
-    Schemes.findById(project_id)
+    Projects.findById(project_id)
     .then(project => {
       if (project) {
         res.json(project);
