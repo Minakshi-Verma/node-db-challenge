@@ -59,44 +59,44 @@ router.post('/', (req,res)=>{
 // })
 
 //-----------
-router.get('/:project_id/tasks', (req,res)=>{
-  const {project_id}= req.params
-  Projects.findById(project_id)
-  .then(project=>{
-    if(project){
-      Projects.findTasks()
-      .then(task=>{
-        if(task){
-          res.status(200).json(tasks)
-        }else{
-          res.status(500).json({error:"sorry! incorrect information provided"})
-        }
-      })
-      .catch(err=>{
-        console.log(err)
-      })
-    }
-  })
-})
+// router.get('/:project_id/tasks', (req,res)=>{
+//   const {project_id}= req.params
+//   Projects.findById(project_id)
+//   .then(project=>{
+//     if(project){
+//       Projects.findTasks()
+//       .then(task=>{
+//         if(task){
+//           res.status(200).json(tasks)
+//         }else{
+//           res.status(500).json({error:"sorry! incorrect information provided"})
+//         }
+//       })
+//       .catch(err=>{
+//         console.log(err)
+//       })
+//     }
+//   })
+// })
 
-//---ADD tasks---------
-router.post('/:project_id/tasks', (req,res)=>{
-  const taskData = req.body
-  const {project_id}= req.params
-  Projects.findById(project_id)
-  .then(project=>{
-    if(project){
-       Projects.addTask(taskData)
-    .then(task=>{
-      res.status(201).json(task);
-    })
-    }
-  }) 
-    .catch (err => {
-      res.status(500).json({ message: 'Failed to create new task' });
-    });
+// //---ADD tasks---------
+// router.post('/:project_id/tasks', (req,res)=>{
+//   const taskData = req.body
+//   const {project_id}= req.params
+//   Projects.findById(project_id)
+//   .then(project=>{
+//     if(project){
+//        Projects.addTask(taskData)
+//     .then(task=>{
+//       res.status(201).json(task);
+//     })
+//     }
+//   }) 
+//     .catch (err => {
+//       res.status(500).json({ message: 'Failed to create new task' });
+//     });
   
-})
+// })
 
 
 

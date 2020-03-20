@@ -14,4 +14,23 @@ router.get('/',(req,res)=>{
         });
   })
 
+  //----ADD a task------
+
+  router.post('/', (req,res)=>{
+      const taskData = req.body
+      Tasks.addTask(taskData)
+      .then(task=>{
+          if(task){
+           res.status(200).json(task)   
+          }else{
+            res.status(500).json({ message: 'sorry' }); 
+          }
+          
+      })
+      .catch (err => {
+        res.status(500).json({ message: 'Failed to add new task' });
+      });
+  })
+
+
   module.exports = router;

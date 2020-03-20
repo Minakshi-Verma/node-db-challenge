@@ -20,6 +20,7 @@ function findtaskById(task_id){
 
 //-----------add new resource----
 async function addTask(task){
-    const [task_id] = await db("tasks").insert(task)
+    const [task_id] = await db("tasks")
+    .insert(task)
     return findById(task_id)
 }
