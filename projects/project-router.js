@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 
 
 //GET project by id----
-router.get('/:project_id/project', (req, res) => {
+router.get('/:project_id', (req, res) => {
     const { project_id } = req.params;
   
     Projects.findById(project_id)

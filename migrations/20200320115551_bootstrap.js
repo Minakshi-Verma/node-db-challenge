@@ -43,7 +43,8 @@ exports.up = function(knex) {
         .string("notes",255)        
 
         tbl
-        .boolean("completed").defaultTo(false)
+        .boolean("completed")
+        .defaultTo(false)
         .notNullable()
         
         //Foreign Key that references the project_id in projects
